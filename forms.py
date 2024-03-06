@@ -4,6 +4,9 @@ from wtforms import StringField, TextAreaField, FloatField, SelectField, Decimal
 
 from wtforms.validators import InputRequired
 
+from flask_wtf.file import FileField, FileAllowed
+from wtforms.validators import DataRequired
+
 #RECIPE ADD FORM
 class RecipeAdd(FlaskForm):
   name = StringField('Name', validators=[InputRequired()])
@@ -35,3 +38,8 @@ class RegistrationForm(FlaskForm):
   password = PasswordField('Password', validators=[validators.DataRequired()])
   confirm_password = PasswordField('Confirm Password', validators=[validators.DataRequired(), validators.EqualTo('password', message='Passwords must match')])
   submit = SubmitField('Register')
+
+# Form for uploading recipe pictures
+class RecipePicForm(FlaskForm):
+    picture = FileField('Recipe Picture', validators=[DataRequired(), FileAllowed(['jpg'], 'Only JPG files allowed.')])
+

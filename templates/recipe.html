@@ -6,6 +6,12 @@
   <h1>{{ recipe.name }}</h1>
 </header>
 <div class="w3-container">
+  <div class="flexible">
+    <div style="max-width:300px">
+        <img src="/static/recipe_pics/recipe_{{ recipe.id }}.jpg" />
+    </div>
+  </div>
+
   <p>Author: {{ recipe.author }}</p>
   <p>Description: {{ recipe.description }}</p>
   <p>Ingredients: {{ recipe.ingredients }}</p>
@@ -18,16 +24,13 @@
   <p><a href="/recipes">Back</a></p>
   {% if current_user.is_authenticated %}
     <p><a href="/edit_recipe/{{recipe.id}}">Edit</a></p>
+  <p><a href="/recipe_pic/{{recipe.id}}">UploadPic</a></p>
     <form action="/delete_recipe/{{recipe.id}}") method="post" onsubmit="return confirm('Are you sure you want to delete this recipe?');">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
       <button type="submit" class="btn btn-danger">Delete</button>
     </form>
   {% endif %}
 
-
-
-
-  
 </footer>
 
 </div>
